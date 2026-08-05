@@ -9,7 +9,7 @@ All URIs are relative to *http://localhost*
 # **queryQuery**
 > QueryQuery200Response queryQuery(queryQueryRequest)
 
-Query the registry by Digital Identifier
+Query the registry by Digital Identifier. Authenticated via x-client-id/x-signature headers (Custodian client credential + HMAC-signed payload), not a bearer token.
 
 ### Example
 
@@ -24,10 +24,12 @@ const configuration = new Configuration();
 const apiInstance = new QueryApi(configuration);
 
 let xClientId: string; //Custodian client ID used to authenticate the requesting custodian (default to undefined)
+let xSignature: string; //HMAC signature of the raw request body, signed with the custodian\'s unique identifier (default to undefined)
 let queryQueryRequest: QueryQueryRequest; //Query definition
 
 const { status, data } = await apiInstance.queryQuery(
     xClientId,
+    xSignature,
     queryQueryRequest
 );
 ```
@@ -38,6 +40,7 @@ const { status, data } = await apiInstance.queryQuery(
 |------------- | ------------- | ------------- | -------------|
 | **queryQueryRequest** | **QueryQueryRequest**| Query definition | |
 | **xClientId** | [**string**] | Custodian client ID used to authenticate the requesting custodian | defaults to undefined|
+| **xSignature** | [**string**] | HMAC signature of the raw request body, signed with the custodian\&#39;s unique identifier | defaults to undefined|
 
 
 ### Return type
