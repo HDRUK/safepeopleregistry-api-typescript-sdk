@@ -1429,7 +1429,6 @@ export interface QueryQuery200ResponseDataUser {
     'first_name'?: string;
     'last_name'?: string;
     'name'?: string;
-    'email'?: string;
     'registry_id'?: number;
     'created_at'?: string;
     'updated_at'?: string;
@@ -1439,7 +1438,6 @@ export interface QueryQuery200ResponseDataUser {
     'unclaimed'?: number;
     'feed_source'?: string | null;
     'public_opt_in'?: number;
-    'declaration_signed'?: boolean;
     'organisation_id'?: number;
     'orcid_scanning'?: boolean;
     'orcid_scanning_completed_at'?: string | null;
@@ -1451,7 +1449,6 @@ export interface QueryQuery200ResponseDataUser {
     'location'?: string | null;
     't_and_c_agreed'?: boolean;
     't_and_c_agreement_date'?: string | null;
-    'uksa_registered'?: boolean;
     'is_sro'?: boolean;
     'invited_by'?: number | null;
     'status'?: string;
@@ -1826,7 +1823,6 @@ export interface User {
     'email_verified_at'?: string;
     'consent_scrape'?: boolean;
     'public_opt_in'?: boolean;
-    'declaration_signed'?: boolean;
     'organisation_id'?: number;
     'orcid_scanning'?: number;
     'orcid_scanning_completed_at'?: string;

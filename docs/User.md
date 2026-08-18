@@ -15,7 +15,6 @@ Name | Type | Description | Notes
 **email_verified_at** | **string** |  | [optional] [default to undefined]
 **consent_scrape** | **boolean** |  | [optional] [default to undefined]
 **public_opt_in** | **boolean** |  | [optional] [default to undefined]
-**declaration_signed** | **boolean** |  | [optional] [default to undefined]
 **organisation_id** | **number** |  | [optional] [default to undefined]
 **orcid_scanning** | **number** |  | [optional] [default to undefined]
 **orcid_scanning_completed_at** | **string** |  | [optional] [default to undefined]
@@ -38,7 +37,6 @@ const instance: User = {
     email_verified_at,
     consent_scrape,
     public_opt_in,
-    declaration_signed,
     organisation_id,
     orcid_scanning,
     orcid_scanning_completed_at,

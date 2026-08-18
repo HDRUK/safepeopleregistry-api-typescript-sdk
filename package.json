@@ -1,6 +1,6 @@
 {
   "name": "@hdruk/safepeopleregistry-api-sdk",
-  "version": "0.0.0-test2",
+  "version": "1.35.0",
   "description": "OpenAPI client for @hdruk/safepeopleregistry-api-sdk",
   "author": "OpenAPI-Generator Contributors",
   "repository": {

@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **first_name** | **string** |  | [optional] [default to undefined]
 **last_name** | **string** |  | [optional] [default to undefined]
 **name** | **string** |  | [optional] [default to undefined]
-**email** | **string** |  | [optional] [default to undefined]
 **registry_id** | **number** |  | [optional] [default to undefined]
 **created_at** | **string** |  | [optional] [default to undefined]
 **updated_at** | **string** |  | [optional] [default to undefined]
@@ -20,7 +19,6 @@ Name | Type | Description | Notes
 **unclaimed** | **number** |  | [optional] [default to undefined]
 **feed_source** | **string** |  | [optional] [default to undefined]
 **public_opt_in** | **number** |  | [optional] [default to undefined]
-**declaration_signed** | **boolean** |  | [optional] [default to undefined]
 **organisation_id** | **number** |  | [optional] [default to undefined]
 **orcid_scanning** | **boolean** |  | [optional] [default to undefined]
 **orcid_scanning_completed_at** | **string** |  | [optional] [default to undefined]
@@ -32,7 +30,6 @@ Name | Type | Description | Notes
 **location** | **string** |  | [optional] [default to undefined]
 **t_and_c_agreed** | **boolean** |  | [optional] [default to undefined]
 **t_and_c_agreement_date** | **string** |  | [optional] [default to undefined]
-**uksa_registered** | **boolean** |  | [optional] [default to undefined]
 **is_sro** | **boolean** |  | [optional] [default to undefined]
 **invited_by** | **number** |  | [optional] [default to undefined]
 **status** | **string** |  | [optional] [default to undefined]
@@ -49,7 +46,6 @@ const instance: QueryQuery200ResponseDataUser = {
     first_name,
     last_name,
     name,
-    email,
     registry_id,
     created_at,
     updated_at,
@@ -59,7 +55,6 @@ const instance: QueryQuery200ResponseDataUser = {
     unclaimed,
     feed_source,
     public_opt_in,
-    declaration_signed,
     organisation_id,
     orcid_scanning,
     orcid_scanning_completed_at,
@@ -71,7 +66,6 @@ const instance: QueryQuery200ResponseDataUser = {
     location,
     t_and_c_agreed,
     t_and_c_agreement_date,
-    uksa_registered,
     is_sro,
     invited_by,
     status,
