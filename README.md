@@ -1,4 +1,4 @@
-## @hdruk/safepeopleregistry-api-sdk@1.35.0
+## @hdruk/safepeopleregistry-api-sdk@1.36.0
 
 This generator creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
 
@@ -36,7 +36,7 @@ navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install @hdruk/safepeopleregistry-api-sdk@1.35.0 --save
+npm install @hdruk/safepeopleregistry-api-sdk@1.36.0 --save
 ```
 
 _unPublished (not recommended):_
@@ -77,11 +77,10 @@ Class | Method | HTTP request | Description
  - [CustodianWebhookReceiver](docs/CustodianWebhookReceiver.md)
  - [DebugLog](docs/DebugLog.md)
  - [DecisionModel](docs/DecisionModel.md)
+ - [DecisionModelType](docs/DecisionModelType.md)
  - [Department](docs/Department.md)
  - [Education](docs/Education.md)
  - [Endorsement](docs/Endorsement.md)
- - [EntityModel](docs/EntityModel.md)
- - [EntityModelType](docs/EntityModelType.md)
  - [Experience](docs/Experience.md)
  - [FeatureIndex200Response](docs/FeatureIndex200Response.md)
  - [FeatureIndex200ResponseData](docs/FeatureIndex200ResponseData.md)
@@ -130,6 +129,8 @@ Class | Method | HTTP request | Description
  - [RegistryHasTraining](docs/RegistryHasTraining.md)
  - [Resolution](docs/Resolution.md)
  - [Sector](docs/Sector.md)
+ - [SsoTenant](docs/SsoTenant.md)
+ - [SsoTenantDomain](docs/SsoTenantDomain.md)
  - [State](docs/State.md)
  - [Subsidiary](docs/Subsidiary.md)
  - [SystemConfig](docs/SystemConfig.md)

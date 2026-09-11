@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **conditions** | **string** | Conditions for the decision model | [default to undefined]
 **rule_class** | **string** | Class defining the rules for the decision model | [default to undefined]
 **description** | **string** | Description of the decision model | [optional] [default to undefined]
-**entity_model_type_id** | **number** | ID of the entity model type associated with the decision | [optional] [default to undefined]
+**decision_model_type_id** | **number** | ID of the decision model type associated with the decision | [optional] [default to undefined]
 **created_at** | **string** | Timestamp when the decision model was created | [optional] [default to undefined]
 **updated_at** | **string** | Timestamp when the decision model was last updated | [optional] [default to undefined]
 
@@ -26,7 +26,7 @@ const instance: DecisionModel = {
     conditions,
     rule_class,
     description,
-    entity_model_type_id,
+    decision_model_type_id,
     created_at,
     updated_at,
 };

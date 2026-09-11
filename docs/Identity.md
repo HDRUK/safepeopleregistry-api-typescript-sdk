@@ -21,6 +21,8 @@ Name | Type | Description | Notes
 **idvt_document_number** | **string** | Document number used for IDVT | [optional] [default to undefined]
 **idvt_document_country** | **string** | Country of the document used for IDVT | [optional] [default to undefined]
 **idvt_document_valid_until** | **string** | Validity date of the document used for IDVT | [optional] [default to undefined]
+**idvt_document_first_name** | **string** | First name on the document used for IDVT | [optional] [default to undefined]
+**idvt_document_valid_last_name** | **string** | Last name on the document used for IDVT | [optional] [default to undefined]
 **idvt_attempt_id** | **string** | ID of the IDVT attempt | [optional] [default to undefined]
 **idvt_context_id** | **string** | Context ID for IDVT | [optional] [default to undefined]
 **idvt_document_dob** | **string** | Date of birth on the document used for IDVT | [optional] [default to undefined]
@@ -53,6 +55,8 @@ const instance: Identity = {
     idvt_document_number,
     idvt_document_country,
     idvt_document_valid_until,
+    idvt_document_first_name,
+    idvt_document_valid_last_name,
     idvt_attempt_id,
     idvt_context_id,
     idvt_document_dob,

@@ -265,7 +265,7 @@ export interface CustodianModelConfig {
     'id'?: number;
     'created_at'?: string;
     'updated_at'?: string;
-    'entity_model_id'?: number;
+    'decision_model_id'?: number;
     'active'?: boolean;
     'custodian_id'?: number;
 }
@@ -403,15 +403,36 @@ export interface DecisionModel {
      */
     'description'?: string;
     /**
-     * ID of the entity model type associated with the decision
+     * ID of the decision model type associated with the decision
      */
-    'entity_model_type_id'?: number;
+    'decision_model_type_id'?: number;
     /**
      * Timestamp when the decision model was created
      */
     'created_at'?: string;
     /**
      * Timestamp when the decision model was last updated
+     */
+    'updated_at'?: string;
+}
+/**
+ * Model representing types of decision models
+ */
+export interface DecisionModelType {
+    /**
+     * Unique identifier for the decision model type
+     */
+    'id'?: number;
+    /**
+     * Name of the decision model type
+     */
+    'name'?: string;
+    /**
+     * Timestamp when the decision model type was created
+     */
+    'created_at'?: string;
+    /**
+     * Timestamp when the decision model type was last updated
      */
     'updated_at'?: string;
 }
@@ -515,76 +536,6 @@ export interface Endorsement {
     'created_at'?: string;
     /**
      * Timestamp when the endorsement was last updated
-     */
-    'updated_at'?: string;
-}
-/**
- * Model representing entity models
- */
-export interface EntityModel {
-    /**
-     * Unique identifier for the entity model
-     */
-    'id'?: number;
-    /**
-     * Name of the entity model
-     */
-    'name'?: string;
-    /**
-     * Description of the entity model
-     */
-    'description'?: string;
-    /**
-     * ID of the entity model type associated with this model
-     */
-    'entity_model_type_id'?: number;
-    /**
-     * Indicates whether the model calls a file
-     */
-    'calls_file'?: boolean;
-    /**
-     * Path to the file called by the model
-     */
-    'file_path'?: string;
-    /**
-     * Indicates whether the model calls an operation
-     */
-    'calls_operation'?: boolean;
-    /**
-     * Operation called by the model
-     */
-    'operation'?: string;
-    /**
-     * Indicates whether the model is active (1 for active, 0 for inactive)
-     */
-    'active'?: number;
-    /**
-     * Timestamp when the entity model was created
-     */
-    'created_at'?: string;
-    /**
-     * Timestamp when the entity model was last updated
-     */
-    'updated_at'?: string;
-}
-/**
- * Model representing types of entity models
- */
-export interface EntityModelType {
-    /**
-     * Unique identifier for the entity model type
-     */
-    'id'?: number;
-    /**
-     * Name of the entity model type
-     */
-    'name'?: string;
-    /**
-     * Timestamp when the entity model type was created
-     */
-    'created_at'?: string;
-    /**
-     * Timestamp when the entity model type was last updated
      */
     'updated_at'?: string;
 }
@@ -779,6 +730,14 @@ export interface Identity {
      * Validity date of the document used for IDVT
      */
     'idvt_document_valid_until'?: string;
+    /**
+     * First name on the document used for IDVT
+     */
+    'idvt_document_first_name'?: string;
+    /**
+     * Last name on the document used for IDVT
+     */
+    'idvt_document_valid_last_name'?: string;
     /**
      * ID of the IDVT attempt
      */
@@ -989,6 +948,14 @@ export interface Organisation {
     'ce_plus_certified'?: boolean;
     'ce_plus_certification_num'?: string;
     'ce_plus_expiry_date'?: string;
+    /**
+     * True if either CE or ISO 27001 certification is currently valid
+     */
+    'ce_or_iso_certified'?: boolean;
+    /**
+     * True if either CE+ or ISO 27001 certification is currently valid
+     */
+    'ce_plus_or_iso_certified'?: boolean;
     'idvt_result'?: number;
     'idvt_result_perc'?: number;
     'idvt_errors'?: string;
@@ -1633,6 +1600,58 @@ export interface Sector {
      * Timestamp when the sector was deleted
      */
     'deleted_at'?: string;
+}
+/**
+ * An enterprise customer\'s SAML Identity Provider connection
+ */
+export interface SsoTenant {
+    /**
+     * Model primary key
+     */
+    'id'?: number;
+    'created_at'?: string;
+    'updated_at'?: string;
+    'name'?: string;
+    'idp_alias'?: string;
+    'metadata_url'?: string;
+    'entity_id'?: string;
+    'metadata_imported_at'?: string;
+    'enabled'?: boolean;
+    /**
+     * Keycloak\'s own SP entity ID - null until approved. Register this as the SAML Identifier on the customer\'s IdP.
+     */
+    'sp_entity_id'?: string;
+    /**
+     * Keycloak\'s ACS/reply URL for this tenant - null until approved.
+     */
+    'sp_acs_url'?: string;
+    /**
+     * Downloadable SP metadata descriptor most IdPs can import directly - null until approved.
+     */
+    'sp_metadata_url'?: string;
+    /**
+     * One of pending, approved, rejected
+     */
+    'status'?: string;
+    /**
+     * ID of the user who submitted this tenant for approval
+     */
+    'submitted_by_user_id'?: number;
+    /**
+     * Reason given when status is rejected - null otherwise
+     */
+    'rejected_reason'?: string;
+}
+/**
+ * An email domain routed to a Registry SSO tenant\'s Identity Provider
+ */
+export interface SsoTenantDomain {
+    /**
+     * Model primary key
+     */
+    'id'?: number;
+    'sso_tenant_id'?: number;
+    'domain'?: string;
 }
 /**
  * Model representing states

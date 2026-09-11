@@ -35,6 +35,8 @@ Name | Type | Description | Notes
 **ce_plus_certified** | **boolean** |  | [optional] [default to undefined]
 **ce_plus_certification_num** | **string** |  | [optional] [default to undefined]
 **ce_plus_expiry_date** | **string** |  | [optional] [default to undefined]
+**ce_or_iso_certified** | **boolean** | True if either CE or ISO 27001 certification is currently valid | [optional] [default to undefined]
+**ce_plus_or_iso_certified** | **boolean** | True if either CE+ or ISO 27001 certification is currently valid | [optional] [default to undefined]
 **idvt_result** | **number** |  | [optional] [default to undefined]
 **idvt_result_perc** | **number** |  | [optional] [default to undefined]
 **idvt_errors** | **string** |  | [optional] [default to undefined]
@@ -89,6 +91,8 @@ const instance: Organisation = {
     ce_plus_certified,
     ce_plus_certification_num,
     ce_plus_expiry_date,
+    ce_or_iso_certified,
+    ce_plus_or_iso_certified,
     idvt_result,
     idvt_result_perc,
     idvt_errors,

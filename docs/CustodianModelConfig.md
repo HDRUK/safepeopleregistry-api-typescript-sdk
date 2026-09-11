@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **id** | **number** | Model primary key | [optional] [default to undefined]
 **created_at** | **string** |  | [optional] [default to undefined]
 **updated_at** | **string** |  | [optional] [default to undefined]
-**entity_model_id** | **number** |  | [optional] [default to undefined]
+**decision_model_id** | **number** |  | [optional] [default to undefined]
 **active** | **boolean** |  | [optional] [default to undefined]
 **custodian_id** | **number** |  | [optional] [default to undefined]
 
@@ -22,7 +22,7 @@ const instance: CustodianModelConfig = {
     id,
     created_at,
     updated_at,
-    entity_model_id,
+    decision_model_id,
     active,
     custodian_id,
 };
