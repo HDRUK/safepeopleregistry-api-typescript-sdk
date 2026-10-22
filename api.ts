@@ -1063,6 +1063,44 @@ export interface OrganisationHasSubsidiary {
      */
     'subsidiary_id'?: number;
 }
+export interface OrganisationsAppointSro200Response {
+    'message'?: string;
+}
+export interface OrganisationsAppointSro400Response {
+    'message'?: string;
+}
+export interface OrganisationsAppointSro403Response {
+    'message'?: string;
+}
+export interface OrganisationsAppointSroRequest {
+    /**
+     * ID of the claimed member to appoint
+     */
+    'user_id'?: number;
+}
+export interface OrganisationsInviteSro201Response {
+    'message'?: string;
+    /**
+     * ID of the invited user
+     */
+    'data'?: number;
+}
+export interface OrganisationsInviteSro409Response {
+    'message'?: string;
+}
+export interface OrganisationsInviteSroRequest {
+    'first_name'?: string;
+    'last_name'?: string;
+    'email'?: string;
+    /**
+     * Job title
+     */
+    'role'?: string;
+    /**
+     * One of the organisation\'s departments
+     */
+    'department_id'?: number | null;
+}
 /**
  * Model representing pending invites
  */
@@ -1994,9 +2032,6 @@ export interface VendorWebhookReceiverReceive200Response {
     'message'?: string;
     'data'?: Array<object>;
 }
-export interface VendorWebhookReceiverReceive400Response {
-    'message'?: string;
-}
 export interface VendorWebhookReceiverReceive500Response {
     'message'?: string;
 }
@@ -2221,6 +2256,334 @@ export class FeatureApi extends BaseAPI {
      */
     public featureIndex(options?: RawAxiosRequestConfig) {
         return FeatureApiFp(this.configuration).featureIndex(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * OrganisationsApi - axios parameter creator
+ */
+export const OrganisationsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Hands the SRO role over immediately: the appointee becomes SRO, the current SRO becomes a delegate, and an invited SRO keeps their invitation but will join as a delegate. Delegates can appoint while the organisation has no claimed SRO; after that only the SRO can.
+         * @summary organisations@appointSro
+         * @param {number} id organisations entry ID
+         * @param {OrganisationsAppointSroRequest} organisationsAppointSroRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        organisationsAppointSro: async (id: number, organisationsAppointSroRequest: OrganisationsAppointSroRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('organisationsAppointSro', 'id', id)
+            // verify required parameter 'organisationsAppointSroRequest' is not null or undefined
+            assertParamExists('organisationsAppointSro', 'organisationsAppointSroRequest', organisationsAppointSroRequest)
+            const localVarPath = `/api/v1/organisations/{id}/sro`
+                .replace('{id}', encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(organisationsAppointSroRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Creates an invited (unclaimed) SRO and emails them an invitation. The current SRO keeps the role until the invitee claims their account; any other invited SRO keeps their invitation but will join as a delegate. Delegates can invite while the organisation has no claimed SRO; after that only the SRO can.
+         * @summary organisations@inviteSro
+         * @param {number} id organisations entry ID
+         * @param {OrganisationsInviteSroRequest} organisationsInviteSroRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        organisationsInviteSro: async (id: number, organisationsInviteSroRequest: OrganisationsInviteSroRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('organisationsInviteSro', 'id', id)
+            // verify required parameter 'organisationsInviteSroRequest' is not null or undefined
+            assertParamExists('organisationsInviteSro', 'organisationsInviteSroRequest', organisationsInviteSroRequest)
+            const localVarPath = `/api/v1/organisations/{id}/sro/invite`
+                .replace('{id}', encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(organisationsInviteSroRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Detaches a delegate from the organisation and notifies them and the remaining members. The SRO and delegates of the organisation can remove other delegates; the SRO cannot be removed and nobody can remove themselves.
+         * @summary organisations@removeDelegate
+         * @param {number} id organisations entry ID
+         * @param {number} userId ID of the delegate to remove
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        organisationsRemoveDelegate: async (id: number, userId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('organisationsRemoveDelegate', 'id', id)
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('organisationsRemoveDelegate', 'userId', userId)
+            const localVarPath = `/api/v1/organisations/{id}/delegates/{userId}`
+                .replace('{id}', encodeURIComponent(String(id)))
+                .replace('{userId}', encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Resends the pending SRO invitation with the code it already has. Delegates can resend while the organisation has no claimed SRO; after that only the SRO can.
+         * @summary organisations@resendSroInvite
+         * @param {number} id organisations entry ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        organisationsResendSroInvite: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('organisationsResendSroInvite', 'id', id)
+            const localVarPath = `/api/v1/organisations/{id}/sro/resend_invite`
+                .replace('{id}', encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * OrganisationsApi - functional programming interface
+ */
+export const OrganisationsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = OrganisationsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Hands the SRO role over immediately: the appointee becomes SRO, the current SRO becomes a delegate, and an invited SRO keeps their invitation but will join as a delegate. Delegates can appoint while the organisation has no claimed SRO; after that only the SRO can.
+         * @summary organisations@appointSro
+         * @param {number} id organisations entry ID
+         * @param {OrganisationsAppointSroRequest} organisationsAppointSroRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async organisationsAppointSro(id: number, organisationsAppointSroRequest: OrganisationsAppointSroRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganisationsAppointSro200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.organisationsAppointSro(id, organisationsAppointSroRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OrganisationsApi.organisationsAppointSro']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Creates an invited (unclaimed) SRO and emails them an invitation. The current SRO keeps the role until the invitee claims their account; any other invited SRO keeps their invitation but will join as a delegate. Delegates can invite while the organisation has no claimed SRO; after that only the SRO can.
+         * @summary organisations@inviteSro
+         * @param {number} id organisations entry ID
+         * @param {OrganisationsInviteSroRequest} organisationsInviteSroRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async organisationsInviteSro(id: number, organisationsInviteSroRequest: OrganisationsInviteSroRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganisationsInviteSro201Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.organisationsInviteSro(id, organisationsInviteSroRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OrganisationsApi.organisationsInviteSro']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Detaches a delegate from the organisation and notifies them and the remaining members. The SRO and delegates of the organisation can remove other delegates; the SRO cannot be removed and nobody can remove themselves.
+         * @summary organisations@removeDelegate
+         * @param {number} id organisations entry ID
+         * @param {number} userId ID of the delegate to remove
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async organisationsRemoveDelegate(id: number, userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganisationsAppointSro200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.organisationsRemoveDelegate(id, userId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OrganisationsApi.organisationsRemoveDelegate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Resends the pending SRO invitation with the code it already has. Delegates can resend while the organisation has no claimed SRO; after that only the SRO can.
+         * @summary organisations@resendSroInvite
+         * @param {number} id organisations entry ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async organisationsResendSroInvite(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganisationsAppointSro200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.organisationsResendSroInvite(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OrganisationsApi.organisationsResendSroInvite']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * OrganisationsApi - factory interface
+ */
+export const OrganisationsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = OrganisationsApiFp(configuration)
+    return {
+        /**
+         * Hands the SRO role over immediately: the appointee becomes SRO, the current SRO becomes a delegate, and an invited SRO keeps their invitation but will join as a delegate. Delegates can appoint while the organisation has no claimed SRO; after that only the SRO can.
+         * @summary organisations@appointSro
+         * @param {number} id organisations entry ID
+         * @param {OrganisationsAppointSroRequest} organisationsAppointSroRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        organisationsAppointSro(id: number, organisationsAppointSroRequest: OrganisationsAppointSroRequest, options?: RawAxiosRequestConfig): AxiosPromise<OrganisationsAppointSro200Response> {
+            return localVarFp.organisationsAppointSro(id, organisationsAppointSroRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Creates an invited (unclaimed) SRO and emails them an invitation. The current SRO keeps the role until the invitee claims their account; any other invited SRO keeps their invitation but will join as a delegate. Delegates can invite while the organisation has no claimed SRO; after that only the SRO can.
+         * @summary organisations@inviteSro
+         * @param {number} id organisations entry ID
+         * @param {OrganisationsInviteSroRequest} organisationsInviteSroRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        organisationsInviteSro(id: number, organisationsInviteSroRequest: OrganisationsInviteSroRequest, options?: RawAxiosRequestConfig): AxiosPromise<OrganisationsInviteSro201Response> {
+            return localVarFp.organisationsInviteSro(id, organisationsInviteSroRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Detaches a delegate from the organisation and notifies them and the remaining members. The SRO and delegates of the organisation can remove other delegates; the SRO cannot be removed and nobody can remove themselves.
+         * @summary organisations@removeDelegate
+         * @param {number} id organisations entry ID
+         * @param {number} userId ID of the delegate to remove
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        organisationsRemoveDelegate(id: number, userId: number, options?: RawAxiosRequestConfig): AxiosPromise<OrganisationsAppointSro200Response> {
+            return localVarFp.organisationsRemoveDelegate(id, userId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Resends the pending SRO invitation with the code it already has. Delegates can resend while the organisation has no claimed SRO; after that only the SRO can.
+         * @summary organisations@resendSroInvite
+         * @param {number} id organisations entry ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        organisationsResendSroInvite(id: number, options?: RawAxiosRequestConfig): AxiosPromise<OrganisationsAppointSro200Response> {
+            return localVarFp.organisationsResendSroInvite(id, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * OrganisationsApi - object-oriented interface
+ */
+export class OrganisationsApi extends BaseAPI {
+    /**
+     * Hands the SRO role over immediately: the appointee becomes SRO, the current SRO becomes a delegate, and an invited SRO keeps their invitation but will join as a delegate. Delegates can appoint while the organisation has no claimed SRO; after that only the SRO can.
+     * @summary organisations@appointSro
+     * @param {number} id organisations entry ID
+     * @param {OrganisationsAppointSroRequest} organisationsAppointSroRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public organisationsAppointSro(id: number, organisationsAppointSroRequest: OrganisationsAppointSroRequest, options?: RawAxiosRequestConfig) {
+        return OrganisationsApiFp(this.configuration).organisationsAppointSro(id, organisationsAppointSroRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Creates an invited (unclaimed) SRO and emails them an invitation. The current SRO keeps the role until the invitee claims their account; any other invited SRO keeps their invitation but will join as a delegate. Delegates can invite while the organisation has no claimed SRO; after that only the SRO can.
+     * @summary organisations@inviteSro
+     * @param {number} id organisations entry ID
+     * @param {OrganisationsInviteSroRequest} organisationsInviteSroRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public organisationsInviteSro(id: number, organisationsInviteSroRequest: OrganisationsInviteSroRequest, options?: RawAxiosRequestConfig) {
+        return OrganisationsApiFp(this.configuration).organisationsInviteSro(id, organisationsInviteSroRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Detaches a delegate from the organisation and notifies them and the remaining members. The SRO and delegates of the organisation can remove other delegates; the SRO cannot be removed and nobody can remove themselves.
+     * @summary organisations@removeDelegate
+     * @param {number} id organisations entry ID
+     * @param {number} userId ID of the delegate to remove
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public organisationsRemoveDelegate(id: number, userId: number, options?: RawAxiosRequestConfig) {
+        return OrganisationsApiFp(this.configuration).organisationsRemoveDelegate(id, userId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Resends the pending SRO invitation with the code it already has. Delegates can resend while the organisation has no claimed SRO; after that only the SRO can.
+     * @summary organisations@resendSroInvite
+     * @param {number} id organisations entry ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public organisationsResendSroInvite(id: number, options?: RawAxiosRequestConfig) {
+        return OrganisationsApiFp(this.configuration).organisationsResendSroInvite(id, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

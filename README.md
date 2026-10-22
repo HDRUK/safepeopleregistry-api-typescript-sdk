@@ -1,4 +1,4 @@
-## @hdruk/safepeopleregistry-api-sdk@1.36.1
+## @hdruk/safepeopleregistry-api-sdk@1.37.0
 
 This generator creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
 
@@ -36,7 +36,7 @@ navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install @hdruk/safepeopleregistry-api-sdk@1.36.1 --save
+npm install @hdruk/safepeopleregistry-api-sdk@1.37.0 --save
 ```
 
 _unPublished (not recommended):_
@@ -53,6 +53,10 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *CustodianUserApi* | [**custodianUserBulkStore**](docs/CustodianUserApi.md#custodianuserbulkstore) | **POST** /api/v1/custodian_users/bulk | Create multiple CustodianUser entries
 *FeatureApi* | [**featureIndex**](docs/FeatureApi.md#featureindex) | **GET** /api/v1/features | Feature@index
+*OrganisationsApi* | [**organisationsAppointSro**](docs/OrganisationsApi.md#organisationsappointsro) | **PUT** /api/v1/organisations/{id}/sro | organisations@appointSro
+*OrganisationsApi* | [**organisationsInviteSro**](docs/OrganisationsApi.md#organisationsinvitesro) | **POST** /api/v1/organisations/{id}/sro/invite | organisations@inviteSro
+*OrganisationsApi* | [**organisationsRemoveDelegate**](docs/OrganisationsApi.md#organisationsremovedelegate) | **DELETE** /api/v1/organisations/{id}/delegates/{userId} | organisations@removeDelegate
+*OrganisationsApi* | [**organisationsResendSroInvite**](docs/OrganisationsApi.md#organisationsresendsroinvite) | **POST** /api/v1/organisations/{id}/sro/resend_invite | organisations@resendSroInvite
 *ProjectUsersApi* | [**projectUsersBulkInviteProjectUsers**](docs/ProjectUsersApi.md#projectusersbulkinviteprojectusers) | **POST** /api/v1/project_users/bulk | Bulk invite Project Users
 *QueryApi* | [**queryQuery**](docs/QueryApi.md#queryquery) | **POST** /api/v1/query | Query@query
 *VendorWebhookReceiverApi* | [**vendorWebhookReceiverReceive**](docs/VendorWebhookReceiverApi.md#vendorwebhookreceiverreceive) | **POST** /api/v1/webhooks/{provider} | Receive a webhook callback from a vendor
@@ -99,6 +103,13 @@ Class | Method | HTTP request | Description
  - [OrganisationHasDepartment](docs/OrganisationHasDepartment.md)
  - [OrganisationHasFile](docs/OrganisationHasFile.md)
  - [OrganisationHasSubsidiary](docs/OrganisationHasSubsidiary.md)
+ - [OrganisationsAppointSro200Response](docs/OrganisationsAppointSro200Response.md)
+ - [OrganisationsAppointSro400Response](docs/OrganisationsAppointSro400Response.md)
+ - [OrganisationsAppointSro403Response](docs/OrganisationsAppointSro403Response.md)
+ - [OrganisationsAppointSroRequest](docs/OrganisationsAppointSroRequest.md)
+ - [OrganisationsInviteSro201Response](docs/OrganisationsInviteSro201Response.md)
+ - [OrganisationsInviteSro409Response](docs/OrganisationsInviteSro409Response.md)
+ - [OrganisationsInviteSroRequest](docs/OrganisationsInviteSroRequest.md)
  - [PendingInvite](docs/PendingInvite.md)
  - [Permission](docs/Permission.md)
  - [ProfessionalRegistration](docs/ProfessionalRegistration.md)
@@ -144,7 +155,6 @@ Class | Method | HTTP request | Description
  - [ValidationLog](docs/ValidationLog.md)
  - [ValidationLogComment](docs/ValidationLogComment.md)
  - [VendorWebhookReceiverReceive200Response](docs/VendorWebhookReceiverReceive200Response.md)
- - [VendorWebhookReceiverReceive400Response](docs/VendorWebhookReceiverReceive400Response.md)
  - [VendorWebhookReceiverReceive500Response](docs/VendorWebhookReceiverReceive500Response.md)
  - [WebhookEventTrigger](docs/WebhookEventTrigger.md)
 

@@ -1,4 +1,4 @@
-# VendorWebhookReceiverReceive400Response
+# OrganisationsInviteSro201Response
 
 
 ## Properties
@@ -6,14 +6,16 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **message** | **string** |  | [optional] [default to undefined]
+**data** | **number** | ID of the invited user | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { VendorWebhookReceiverReceive400Response } from '@hdruk/safepeopleregistry-api-sdk';
+import { OrganisationsInviteSro201Response } from '@hdruk/safepeopleregistry-api-sdk';
 
-const instance: VendorWebhookReceiverReceive400Response = {
+const instance: OrganisationsInviteSro201Response = {
     message,
+    data,
 };
 ```
 
