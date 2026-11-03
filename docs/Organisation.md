@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **id** | **number** | Model primary key | [optional] [default to undefined]
 **created_at** | **string** |  | [optional] [default to undefined]
 **updated_at** | **string** |  | [optional] [default to undefined]
+**status_changed_at** | **string** | When the organisation\&#39;s status last changed. Only returned by the organisations index. | [optional] [default to undefined]
 **organisation_name** | **string** |  | [optional] [default to undefined]
 **address_1** | **string** |  | [optional] [default to undefined]
 **address_2** | **string** |  | [optional] [default to undefined]
@@ -65,6 +66,7 @@ const instance: Organisation = {
     id,
     created_at,
     updated_at,
+    status_changed_at,
     organisation_name,
     address_1,
     address_2,

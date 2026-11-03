@@ -13,7 +13,11 @@ Name | Type | Description | Notes
 **member_id** | **string** | Member ID UUID | [optional] [default to undefined]
 **relationship** | **string** | Textual representation of affiliation relationship | [optional] [default to undefined]
 **from** | **string** | Date affiliation commenced | [optional] [default to undefined]
-**to** | **string** | Date affiliation concluded | [optional] [default to undefined]
+**to** | **string** | Date affiliation ends (or ended). Null when there is no known end date | [optional] [default to undefined]
+**end_date_recorded_at** | **string** | When the end date was recorded | [optional] [default to undefined]
+**end_date_recorded_by** | **number** | The user who recorded the end date | [optional] [default to undefined]
+**end_date_source** | **string** | Who recorded the end date. The organisation\&#39;s date wins over the user\&#39;s | [optional] [default to undefined]
+**left_at** | **string** | When the leaver flow ran for this affiliation | [optional] [default to undefined]
 **department** | **string** | Department worked during affiliation | [optional] [default to undefined]
 **role** | **string** | Role held during affiliation | [optional] [default to undefined]
 **email** | **string** | Professional email held during affiliation | [optional] [default to undefined]
@@ -39,6 +43,10 @@ const instance: Affiliation = {
     relationship,
     from,
     to,
+    end_date_recorded_at,
+    end_date_recorded_by,
+    end_date_source,
+    left_at,
     department,
     role,
     email,

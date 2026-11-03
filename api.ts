@@ -108,9 +108,25 @@ export interface Affiliation {
      */
     'from'?: string;
     /**
-     * Date affiliation concluded
+     * Date affiliation ends (or ended). Null when there is no known end date
      */
-    'to'?: string;
+    'to'?: string | null;
+    /**
+     * When the end date was recorded
+     */
+    'end_date_recorded_at'?: string | null;
+    /**
+     * The user who recorded the end date
+     */
+    'end_date_recorded_by'?: number | null;
+    /**
+     * Who recorded the end date. The organisation\'s date wins over the user\'s
+     */
+    'end_date_source'?: AffiliationEndDateSourceEnum | null;
+    /**
+     * When the leaver flow ran for this affiliation
+     */
+    'left_at'?: string | null;
     /**
      * Department worked during affiliation
      */
@@ -152,6 +168,14 @@ export interface Affiliation {
      */
     'is_verified'?: boolean;
 }
+
+export const AffiliationEndDateSourceEnum = {
+    User: 'user',
+    Organisation: 'organisation',
+} as const;
+
+export type AffiliationEndDateSourceEnum = typeof AffiliationEndDateSourceEnum[keyof typeof AffiliationEndDateSourceEnum];
+
 /**
  * Charity model
  */
@@ -922,6 +946,10 @@ export interface Organisation {
     'id'?: number;
     'created_at'?: string;
     'updated_at'?: string;
+    /**
+     * When the organisation\'s status last changed. Only returned by the organisations index.
+     */
+    'status_changed_at'?: string;
     'organisation_name'?: string;
     'address_1'?: string;
     'address_2'?: string;
