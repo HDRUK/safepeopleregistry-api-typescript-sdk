@@ -331,6 +331,7 @@ export interface CustodianUserBulkStoreRequestUsersInner {
 export const CustodianUserBulkStoreRequestUsersInnerPermissionEnum = {
     CustodianAdmin: 'CUSTODIAN_ADMIN',
     CustodianApprover: 'CUSTODIAN_APPROVER',
+    CustodianReadOnly: 'CUSTODIAN_READ_ONLY',
 } as const;
 
 export type CustodianUserBulkStoreRequestUsersInnerPermissionEnum = typeof CustodianUserBulkStoreRequestUsersInnerPermissionEnum[keyof typeof CustodianUserBulkStoreRequestUsersInnerPermissionEnum];
